@@ -106,16 +106,47 @@ if (file_exists("fetch_all_buses.php")) {
     </nav>
 
     <div class="dashboard-container">
-        <div class="glass-panel">
-            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                <h2 class="fw-bold m-0" id="dash_staff_title">Bus Schedule Management</h2>
-                <button class="btn btn-sm btn-primary" onclick="location.reload()"><i
-                        class="bi bi-arrow-clockwise me-1"></i> Refresh</button>
+            <!-- New Inline Broadcast Section -->
+            <div class="glass-panel mb-4 p-5" style="border: 1px solid rgba(255,255,255,0.3);">
+                <h4 class="fw-bold mb-3" style="color: var(--text-heading); letter-spacing: -0.5px;"><i class="bi bi-megaphone-fill me-3 p-2 rounded-circle bg-primary text-white"></i>Make an Announcement</h4>
+                <p class="text-muted mb-3">Send a message to all passengers in <strong><?php echo htmlspecialchars($_SESSION['admin_district'] ?? 'your district'); ?></strong>. (Expires in 24h)</p>
+                
+                <form action="post_message_process.php" method="POST" class="d-flex gap-2">
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control" name="message" placeholder="Type your message here (e.g., 'Bus 404 is delayed due to traffic')" required
+                            style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); height: 50px; border-radius: 50px; padding-left: 1.5rem;">
+                    </div>
+                    <button type="submit" class="btn btn-primary px-4 rounded-pill fw-bold" style="height: 50px; min-width: 120px;">
+                        <i class="bi bi-send-fill me-2"></i>Send
+                    </button>
+                </form>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-dark">
+            <div class="glass-panel">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h2 class="fw-bold m-0" id="dash_staff_title">Bus Schedule Management</h2>
+                    <button class="btn btn-sm btn-primary" onclick="location.reload()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                    </button>
+                </div>
+
+            <!-- Alert Messages -->
+            <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Message broadcasted successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Failed to broadcast message. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+
+            <div class="table-responsive" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <table class="table table-hover align-middle mb-0" style="background: rgba(255,255,255,0.9);">
+                    <thead class="bg-primary text-white" style="background: var(--gradient-primary);">
                         <tr>
                             <th id="th_bus_id">Bus ID</th>
                             <th id="th_route">Route</th>
@@ -187,6 +218,7 @@ if (file_exists("fetch_all_buses.php")) {
             appTitleEl.textContent = translations[localStorage.getItem('user_lang')].app_title.toUpperCase();
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

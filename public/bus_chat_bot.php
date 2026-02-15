@@ -160,6 +160,7 @@ session_start();
                 Hello! I can help you find buses. Just enter your destination village or stop name (e.g., "Tirunelveli",
                 "Market").
             </div>
+            <!-- Admin Announcements will appear here -->
         </div>
         <div class="chat-input-area">
             <input type="text" id="userInput" class="form-control rounded-pill" placeholder="Type a destination..."
@@ -248,6 +249,37 @@ session_start();
         sendBtn.addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
+        });
+
+        // Auto-fetch announcements on load
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const district = urlParams.get('district');
+
+            if (district) {
+                try {
+                    const response = await fetch('chatbot_backend.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'fetch_messages', district: district })
+                    });
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        // Add a small delay for natural feel
+                        setTimeout(() => {
+                            const announcementDiv = document.createElement('div');
+                            announcementDiv.classList.add('message', 'bot');
+                            announcementDiv.style.borderLeft = '4px solid var(--primary-blue)';
+                            announcementDiv.innerHTML = `<strong>📢 Announcement from ${district} Admin:</strong><br>${data.message}<br><small class="text-muted" style="font-size: 0.75em;">${new Date(data.time).toLocaleString()}</small>`;
+                            chatMessages.appendChild(announcementDiv);
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }, 500);
+                    }
+                } catch (error) {
+                    console.log('Failed to fetch announcements', error);
+                }
+            }
         });
     </script>
 </body>

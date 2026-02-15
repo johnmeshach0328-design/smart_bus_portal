@@ -152,6 +152,35 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='User feedback';
 
 -- ============================================================================
+-- TABLE: route_diversions
+-- Description: Temporary emergency route diversions
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS `route_diversions` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `bus_id` INT(11) NOT NULL,
+    `admin_id` INT(11) NOT NULL,
+    `district` VARCHAR(100) NOT NULL,
+    `original_route` VARCHAR(255) NOT NULL,
+    `stop1` VARCHAR(200) NOT NULL,
+    `stop2` VARCHAR(200) NOT NULL,
+    `stop3` VARCHAR(200) NOT NULL,
+    `stop4` VARCHAR(200) NOT NULL,
+    `emergency_reason` TEXT NOT NULL,
+    `start_time` DATETIME NOT NULL,
+    `end_time` DATETIME NOT NULL,
+    `completion_status` ENUM('Pending', 'In Transit', 'Completed') DEFAULT 'Pending',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    PRIMARY KEY (`id`),
+    KEY `district` (`district`),
+    KEY `start_time` (`start_time`),
+    KEY `end_time` (`end_time`),
+    KEY `completion_status` (`completion_status`),
+    FOREIGN KEY (`bus_id`) REFERENCES `buses`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`admin_id`) REFERENCES `platform_incharges`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Emergency route diversions';
+
+-- ============================================================================
 -- INITIAL DATA - Platform Incharges
 -- Description: Default platform incharge accounts for all 38 Tamil Nadu districts
 -- Default password: "admin" (should be changed after first login in production)

@@ -74,6 +74,8 @@
 .btn-primary {
     background-color: var(--primary-blue) !important;
     border-color: var(--primary-blue) !important;
+    color: var(--btn-text-color, #ffffff) !important;
+    /* Fallback to white */
 }
 
 .btn-primary:hover,
@@ -153,12 +155,12 @@ h6,
 .card h4,
 .card h5,
 .card h6,
-.login-card h1,
-.login-card h2,
-.login-card h3,
-.login-card h4,
-.login-card h5,
-.login-card h6,
+.login-card:not(.login-image) h1,
+.login-card:not(.login-image) h2,
+.login-card:not(.login-image) h3,
+.login-card:not(.login-image) h4,
+.login-card:not(.login-image) h5,
+.login-card:not(.login-image) h6,
 .portal-header h1,
 .portal-header h2,
 .portal-header h3,
@@ -642,18 +644,25 @@ body {
 }
 
 .type-card {
-    background: var(--white);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     width: 320px;
     padding: 3rem 2rem;
     border-radius: var(--border-radius-xl);
     text-decoration: none;
-    color: var(--gray-800);
+    color: var(--text-main);
     box-shadow: var(--shadow-lg);
     transition: var(--transition-bounce);
     text-align: center;
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
+}
+
+.type-card h3,
+.type-card i {
+    color: var(--text-heading) !important;
+    text-shadow: var(--text-shadow-glow);
 }
 
 .type-card::before {
@@ -881,13 +890,13 @@ body {
     --bs-table-bg: transparent;
 }
 
-.table > :not(caption) > * > * {
+.table> :not(caption)>*>* {
     color: var(--text-main) !important;
     background-color: transparent;
     border-bottom-color: var(--border-color) !important;
 }
 
-.table-hover > tbody > tr:hover > * {
+.table-hover>tbody>tr:hover>* {
     background-color: rgba(255, 255, 255, 0.05) !important;
     color: var(--text-main) !important;
 }

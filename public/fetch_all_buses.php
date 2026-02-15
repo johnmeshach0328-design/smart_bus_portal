@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['platform_incharge'])) {
     header("Location: platform_incharge_login.php");
     exit;
@@ -19,9 +21,9 @@ require_once 'db.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- Custom CSS -->
     <!-- Custom CSS -->
-    <link href="assets/CSS/custom_style.css" rel="stylesheet">
-    <script src="assets/js/theme-manager.js"></script>
-    <script src="assets/js/font-color-loader.js"></script>
+    <link href="assets/CSS/custom_style.css?v=professional_v4" rel="stylesheet">
+    <script src="assets/js/theme-manager.js?v=professional_v4"></script>
+    <script src="assets/js/font-color-loader.js?v=professional_v4"></script>
 </head>
 <body class="bg-movable bg-view-fleet bg-overlay">
      <!-- Background Animation -->
@@ -75,7 +77,12 @@ require_once 'db.php';
 
 <?php else: 
     $admin_dist = $_SESSION['admin_district'] ?? '';
-    $stmt = $conn->prepare("SELECT * FROM buses WHERE bus_type = ? AND district = ?");
+    // Fetch buses with diversion info
+    $sql = "SELECT b.*, rd.id as diversion_id, rd.stop2, rd.stop3, rd.stop4 
+            FROM buses b 
+            LEFT JOIN route_diversions rd ON b.id = rd.bus_id AND rd.completion_status != 'Completed'
+            WHERE b.bus_type = ? AND b.district = ?";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $bus_type, $admin_dist);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -97,10 +104,24 @@ require_once 'db.php';
                 </thead>
                 <tbody>
                     <?php if ($result->num_rows > 0): ?>
-                        <?php while($row = $result->fetch_assoc()): ?>
+                        <?php while($row = $result->fetch_assoc()): 
+                            $is_diverted = !empty($row['diversion_id']);
+                        ?>
                         <tr>
-                            <td class="fw-bold text-primary"><?php echo htmlspecialchars($row['bus_number']); ?></td>
-                            <td><?php echo htmlspecialchars($row['route']); ?></td>
+                            <td class="fw-bold text-primary">
+                                <?php echo htmlspecialchars($row['bus_number']); ?>
+                                <?php if ($is_diverted): ?>
+                                    <span class="badge bg-warning text-dark ms-2"><i class="bi bi-cone-striped"></i> Diverted</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($row['route']); ?>
+                                <?php if ($is_diverted): ?>
+                                    <div class="small text-danger mt-1">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Via: <?php echo htmlspecialchars($row['stop2'] . ' - ' . $row['stop3']); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>

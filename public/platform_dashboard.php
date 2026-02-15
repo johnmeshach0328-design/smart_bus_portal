@@ -107,6 +107,38 @@ require_once 'db.php';
 
     <!-- Main Content -->
     <div class="container mt-5">
+        <!-- Inline Broadcast Section -->
+        <div class="glass-panel mb-5 p-4 mx-auto" style="max-width: 800px;">
+            <h4 class="fw-bold mb-3" style="color: var(--text-heading);"><i
+                    class="bi bi-megaphone-fill me-2 text-primary"></i>Make an Announcement</h4>
+            <p class="text-muted mb-3">Send a message to all passengers in <strong><?php echo htmlspecialchars($_SESSION['admin_district'] ?? 'your district'); ?></strong>. (Expires in 24h)</p>
+
+            <form action="post_message_process.php" method="POST" class="d-flex gap-2">
+                <div class="flex-grow-1">
+                    <input type="text" class="form-control" name="message"
+                        placeholder="Type your message here (e.g., 'Bus 404 is delayed due to traffic')" required
+                        style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color);">
+                </div>
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-send-fill me-2"></i>Send
+                </button>
+            </form>
+            
+            <!-- Alert Messages -->
+            <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    Message broadcasted successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    Failed to broadcast message. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+        </div>
+
         <div class="row g-4 justify-content-center">
 
             <!-- Add Bus -->
@@ -168,6 +200,21 @@ require_once 'db.php';
                     <a href="mark_attendance.php" class="btn w-100 rounded-pill fw-bold"
                         style="background: var(--primary-blue); color: var(--card-bg); border: none;"
                         id="btn_mark">Mark</a>
+                </div>
+            </div>
+
+            <!-- Route Diversion -->
+            <div class="col-md-6 col-lg-3">
+                <div class="custom-card shadow-lg h-100 p-4 rounded-4 text-center hover-up"
+                    style="background: var(--card-bg); border: 2px solid var(--border-color); box-shadow: 0 0 15px rgba(0,0,0,0.2) !important;">
+                    <div class="mb-3">
+                        <i class="bi bi-cone-striped"
+                            style="font-size: 2.5rem; color: var(--accent-orange) !important;"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3" 
+                        style="color: var(--text-heading) !important;">Route Diversion</h3>
+                    <a href="manage_diversions.php" class="btn w-100 rounded-pill fw-bold"
+                        style="background: var(--accent-orange); color: #fff; border: none;">Manage</a>
                 </div>
             </div>
 

@@ -55,9 +55,9 @@ function time_ago($timestamp)
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- Custom CSS -->
     <!-- Custom CSS -->
-    <link href="assets/CSS/custom_style.css" rel="stylesheet">
-    <script src="assets/js/theme-manager.js"></script>
-    <script src="assets/js/font-color-loader.js"></script>
+    <link href="assets/CSS/custom_style.css?v=professional_v4" rel="stylesheet">
+    <script src="assets/js/theme-manager.js?v=professional_v4"></script>
+    <script src="assets/js/font-color-loader.js?v=professional_v4"></script>
     <style>
         body {
             /* Background managed by theme-manager.js */
@@ -314,8 +314,12 @@ function time_ago($timestamp)
                 $message = "Attendance updated successfully!";
             }
 
-            // Fetch Buses for this category and district
-            $stmt = $conn->prepare("SELECT * FROM buses WHERE bus_type = ? AND district = ?");
+            // Fetch Buses for this category and district with Diversion Status
+            $sql = "SELECT b.*, rd.id as diversion_id, rd.stop2, rd.stop3, rd.stop4, rd.original_route 
+                    FROM buses b 
+                    LEFT JOIN route_diversions rd ON b.id = rd.bus_id AND rd.completion_status != 'Completed'
+                    WHERE b.bus_type = ? AND b.district = ?";
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $bus_type, $admin_dist);
             $stmt->execute();
             $buses = $stmt->get_result();
@@ -354,10 +358,25 @@ function time_ago($timestamp)
                                             $res = $c_stmt->get_result()->fetch_assoc();
                                             $c_status = $res['status'] ?? '';
                                             $c_detailed = $res['detailed_status'] ?? 'Scheduled';
+                                            
+                                            // Diversion Badge
+                                            $is_diverted = !empty($row['diversion_id']);
                                             ?>
                                             <tr style="background: var(--card-bg); color: var(--text-main); border-color: var(--border-color);">
-                                                <td class="fw-bold"><?php echo htmlspecialchars($row['bus_number']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['route']); ?></td>
+                                                <td class="fw-bold">
+                                                    <?php echo htmlspecialchars($row['bus_number']); ?>
+                                                    <?php if ($is_diverted): ?>
+                                                        <br><span class="badge bg-warning text-dark border border-dark"><i class="bi bi-cone-striped me-1"></i>Diverted</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['route']); ?>
+                                                    <?php if ($is_diverted): ?>
+                                                        <div class="small text-danger mt-1">
+                                                            <i class="bi bi-exclamation-triangle-fill"></i> Via: <?php echo htmlspecialchars($row['stop2'] . ' - ' . $row['stop3']); ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <input type="hidden" name="bus_ids[]" value="<?php echo $row['id']; ?>">
                                                     <div class="mb-2">

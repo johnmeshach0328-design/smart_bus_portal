@@ -15,7 +15,8 @@ const themes = {
         '--card-bg': 'rgba(20, 20, 20, 0.95)',
         '--input-bg': '#1a1a1a',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(212, 175, 55, 0.3)'
+        '--border-color': 'rgba(212, 175, 55, 0.3)',
+        '--btn-text-color': '#ffffff'
     },
     corporate: {
         '--primary-blue': '#3b82f6',
@@ -27,7 +28,8 @@ const themes = {
         '--card-bg': 'rgba(15, 23, 42, 0.95)',
         '--input-bg': '#1e293b',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(59, 130, 246, 0.2)'
+        '--border-color': 'rgba(59, 130, 246, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     emerald: {
         '--primary-blue': '#10b981',
@@ -39,7 +41,8 @@ const themes = {
         '--card-bg': 'rgba(6, 78, 59, 0.95)',
         '--input-bg': '#065f46',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(16, 185, 129, 0.2)'
+        '--border-color': 'rgba(16, 185, 129, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     slate: {
         '--primary-blue': '#94a3b8',
@@ -51,7 +54,8 @@ const themes = {
         '--card-bg': 'rgba(15, 23, 42, 0.95)',
         '--input-bg': '#1e293b',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(148, 163, 184, 0.2)'
+        '--border-color': 'rgba(148, 163, 184, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     platinum: {
         '--primary-blue': '#e4e4e7',
@@ -63,7 +67,8 @@ const themes = {
         '--card-bg': 'rgba(24, 24, 27, 0.95)',
         '--input-bg': '#27272a',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(228, 228, 231, 0.2)'
+        '--border-color': 'rgba(228, 228, 231, 0.2)',
+        '--btn-text-color': '#000000'
     },
     sapphire: {
         '--primary-blue': '#3b82f6',
@@ -75,7 +80,8 @@ const themes = {
         '--card-bg': 'rgba(30, 58, 138, 0.95)',
         '--input-bg': '#1e3a8a',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(59, 130, 246, 0.2)'
+        '--border-color': 'rgba(59, 130, 246, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     crimson: {
         '--primary-blue': '#ef4444',
@@ -87,7 +93,8 @@ const themes = {
         '--card-bg': 'rgba(127, 29, 29, 0.95)',
         '--input-bg': '#991b1b',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(239, 68, 68, 0.2)'
+        '--border-color': 'rgba(239, 68, 68, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     onyx: {
         '--primary-blue': '#ffffff',
@@ -99,7 +106,8 @@ const themes = {
         '--card-bg': 'rgba(10, 10, 10, 0.95)',
         '--input-bg': '#171717',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(255, 255, 255, 0.1)'
+        '--border-color': 'rgba(255, 255, 255, 0.1)',
+        '--btn-text-color': '#000000'
     },
     amber: {
         '--primary-blue': '#fbbf24',
@@ -111,7 +119,8 @@ const themes = {
         '--card-bg': 'rgba(120, 53, 15, 0.95)',
         '--input-bg': '#92400e',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(251, 191, 36, 0.2)'
+        '--border-color': 'rgba(251, 191, 36, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     arctic: {
         '--primary-blue': '#22d3ee',
@@ -123,7 +132,8 @@ const themes = {
         '--card-bg': 'rgba(21, 94, 117, 0.95)',
         '--input-bg': '#155e75',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(34, 211, 238, 0.2)'
+        '--border-color': 'rgba(34, 211, 238, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
 
     // Original Themes
@@ -137,7 +147,8 @@ const themes = {
         '--card-bg': 'rgba(30, 41, 59, 0.95)',
         '--input-bg': '#1e293b',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(56, 189, 248, 0.1)'
+        '--border-color': 'rgba(56, 189, 248, 0.1)',
+        '--btn-text-color': '#ffffff'
     },
     midnight: {
         '--primary-blue': '#818cf8',
@@ -149,7 +160,8 @@ const themes = {
         '--card-bg': 'rgba(49, 46, 129, 0.95)',
         '--input-bg': '#312e81',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(129, 140, 248, 0.2)'
+        '--border-color': 'rgba(129, 140, 248, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     ocean: {
         '--primary-blue': '#38bdf8',
@@ -161,7 +173,8 @@ const themes = {
         '--card-bg': 'rgba(2, 132, 199, 0.95)',
         '--input-bg': '#075985',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(56, 189, 248, 0.2)'
+        '--border-color': 'rgba(56, 189, 248, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     sunset: {
         '--primary-blue': '#fbbf24',
@@ -173,7 +186,8 @@ const themes = {
         '--card-bg': 'rgba(124, 45, 18, 0.95)',
         '--input-bg': '#9a3412',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(251, 191, 36, 0.2)'
+        '--border-color': 'rgba(251, 191, 36, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     forest: {
         '--primary-blue': '#34d399',
@@ -185,7 +199,8 @@ const themes = {
         '--card-bg': 'rgba(6, 78, 59, 0.95)',
         '--input-bg': '#065f46',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(52, 211, 153, 0.2)'
+        '--border-color': 'rgba(52, 211, 153, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     royal: {
         '--primary-blue': '#a78bfa',
@@ -197,7 +212,8 @@ const themes = {
         '--card-bg': 'rgba(76, 29, 149, 0.95)',
         '--input-bg': '#5b21b6',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(167, 139, 250, 0.2)'
+        '--border-color': 'rgba(167, 139, 250, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     berry: {
         '--primary-blue': '#f472b6',
@@ -209,7 +225,8 @@ const themes = {
         '--card-bg': 'rgba(131, 24, 67, 0.95)',
         '--input-bg': '#9d174d',
         '--input-text': '#ffffff',
-        '--border-color': 'rgba(244, 114, 182, 0.2)'
+        '--border-color': 'rgba(244, 114, 182, 0.2)',
+        '--btn-text-color': '#ffffff'
     },
     graphite: {
         '--primary-blue': '#a1a1aa',

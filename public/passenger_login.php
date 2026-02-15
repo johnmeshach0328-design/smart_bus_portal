@@ -16,8 +16,8 @@ session_start();
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <link href="assets/CSS/custom_style.css?v=professional_v3" rel="stylesheet">
-    <script src="assets/js/theme-manager.js?v=professional_v3"></script>
+    <link href="assets/CSS/custom_style.css?v=professional_v4" rel="stylesheet">
+    <script src="assets/js/theme-manager.js?v=professional_v4"></script>
     <script src="assets/js/font-color-loader.js"></script>
 
     <style>
@@ -121,14 +121,14 @@ session_start();
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s;
-            color: white;
+            color: var(--btn-text-color, #ffffff);
         }
 
         .btn-login:hover {
             background: var(--primary-blue-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            color: white;
+            color: var(--btn-text-color, #ffffff);
         }
 
         @media (max-width: 768px) {
@@ -191,7 +191,7 @@ session_start();
                     <div class="btn-group bg-light rounded-pill p-1 border" role="group">
                         <button type="button" class="btn btn-primary rounded-pill px-4" id="btnSigninTab"
                             onclick="console.log('Sign In clicked'); toggleAuth('signin'); return false;"
-                            style="color: white !important;">Sign
+                            style="color: var(--btn-text-color, #ffffff) !important;">Sign
                             In</button>
                         <button type="button" class="btn btn-light rounded-pill px-4 text-dark fw-bold"
                             id="btnSignupTab"
@@ -316,7 +316,7 @@ session_start();
 
                 btnSignup.classList.remove('btn-light', 'text-dark');
                 btnSignup.classList.add('btn-primary');
-                btnSignup.style.color = 'white';
+                btnSignup.style.color = 'var(--btn-text-color, #ffffff)';
                 btnSignin.classList.add('btn-light', 'text-dark');
                 btnSignin.classList.remove('btn-primary');
                 btnSignin.style.color = '#212529';
@@ -343,7 +343,7 @@ session_start();
 
                 btnSignin.classList.remove('btn-light', 'text-dark');
                 btnSignin.classList.add('btn-primary');
-                btnSignin.style.color = 'white';
+                btnSignin.style.color = 'var(--btn-text-color, #ffffff)';
                 btnSignup.classList.add('btn-light', 'text-dark');
                 btnSignup.classList.remove('btn-primary');
                 btnSignup.style.color = '#212529';
