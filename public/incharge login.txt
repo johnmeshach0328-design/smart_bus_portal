@@ -1,0 +1,70 @@
+<?php
+session_start();
+
+$_SESSION['platform_incharge'] = "Test Incharge";
+header("Location: platform_incharge_dashboard.php");
+exit();
+
+$conn = mysqli_connect("localhost", "root", "", "smart_bus_portal");
+
+if (!$conn) {
+    die("Database connection failed");
+}
+
+$error = "";
+
+if (isset($_POST['login'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $reg_no = mysqli_real_escape_string($conn, $_POST['reg_no']);
+
+    $query = "SELECT * FROM platform_incharge 
+              WHERE name='$name' AND reg_no='$reg_no'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) == 1) {
+        $_SESSION['platform_incharge'] = $name;
+		header("Location: platform_incharge_dashboard.php");
+		exit();
+    } else {
+        $error = "Invalid Name or Registration Number";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Platform Incharge Login</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; }
+        login-box {
+            width: 350px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button { background: #007bff; color: white; border: none; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Platform Incharge Login</h2>
+
+    <?php if ($error) echo "<p class='error'>$error</p>"; ?>
+
+    <form method="POST">
+        <input type="text" name="name" placeholder="Platform Incharge Name" required>
+        <input type="text" name="reg_no" placeholder="Registration Number" required>
+        <button type="submit" name="login">Login</button>
+    </form>
+</div>
+</body>
+</html>

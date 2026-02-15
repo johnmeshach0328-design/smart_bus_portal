@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Debug Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="assets/js/theme-manager.js?v=premium_polish_final"></script>
+    <script src="assets/js/font-color-loader.js"></script>
+</head>
+
+<body class="p-5">
+    <h1>Signup Button Test</h1>
+    <p>This page tests if the signup button toggle works</p>
+
+    <div class="btn-group bg-light rounded-pill p-1 border mb-4" role="group">
+        <button type="button" class="btn btn-primary rounded-pill px-4" id="btnSigninTab"
+            onclick="toggleAuth('signin')">Sign In</button>
+        <button type="button" class="btn btn-light rounded-pill px-4 text-muted" id="btnSignupTab"
+            onclick="toggleAuth('signup')">Sign Up</button>
+    </div>
+
+    <div id="nameFieldContainer" class="mb-3" style="display: none;">
+        <label>NAME FIELD (Should show on signup)</label>
+        <input type="text" class="form-control" id="passengerNameInput">
+    </div>
+
+    <div id="captchaSection" class="mb-3" style="display: none;">
+        <label>CAPTCHA (Should show on signup)</label>
+        <input type="text" class="form-control" id="captchaInput">
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submitBtn">Submit Button</button>
+
+    <div class="mt-4 p-3 bg-light">
+        <h5>Debug Info:</h5>
+        <p>Mode: <span id="modeDisplay">signin</span></p>
+        <p>Name Field Visible: <span id="nameVisible">No</span></p>
+        <p>CAPTCHA Visible: <span id="captchaVisible">No</span></p>
+    </div>
+
+    <script>
+        function toggleAuth(mode) {
+            console.log('toggleAuth called with mode:', mode);
+
+            const btnSignin = document.getElementById('btnSigninTab');
+            const btnSignup = document.getElementById('btnSignupTab');
+            const nameField = document.getElementById('nameFieldContainer');
+            const nameInput = document.getElementById('passengerNameInput');
+            const captchaSection = document.getElementById('captchaSection');
+            const captchaInput = document.getElementById('captchaInput');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Debug display
+            document.getElementById('modeDisplay').textContent = mode;
+
+            if (mode === 'signup') {
+                console.log('Switching to SIGNUP mode');
+                nameField.style.display = 'block';
+                nameInput.required = true;
+                captchaSection.style.display = 'block';
+                captchaInput.required = true;
+
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.classList.add('btn-success');
+                submitBtn.textContent = 'Sign Up';
+
+                btnSignup.classList.remove('btn-light', 'text-muted');
+                btnSignup.classList.add('btn-primary');
+                btnSignin.classList.add('btn-light', 'text-muted');
+                btnSignin.classList.remove('btn-primary');
+
+                document.getElementById('nameVisible').textContent = 'Yes';
+                document.getElementById('captchaVisible').textContent = 'Yes';
+            } else {
+                console.log('Switching to SIGNIN mode');
+                nameField.style.display = 'none';
+                nameInput.required = false;
+                captchaSection.style.display = 'none';
+                captchaInput.required = false;
+
+                submitBtn.classList.add('btn-primary');
+                submitBtn.classList.remove('btn-success');
+                submitBtn.textContent = 'Sign In';
+
+                btnSignin.classList.remove('btn-light', 'text-muted');
+                btnSignin.classList.add('btn-primary');
+                btnSignup.classList.add('btn-light', 'text-muted');
+                btnSignup.classList.remove('btn-primary');
+
+                document.getElementById('nameVisible').textContent = 'No';
+                document.getElementById('captchaVisible').textContent = 'No';
+            }
+        }
+
+        // Test on page load
+        console.log('Page loaded, toggleAuth function is defined:', typeof toggleAuth);
+    </script>
+</body>
+
+</html>

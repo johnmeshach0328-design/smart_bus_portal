@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font & Color Test</title>
+    <style>
+        body {
+            padding: 40px;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .test-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        #output {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Font & Color Customization Test</h1>
+
+    <div class="test-box">
+        <h2>Current Settings</h2>
+        <p id="currentFont">Font: <span id="fontDisplay">Loading...</span></p>
+        <p id="currentColor">Color: <span id="colorDisplay">Loading...</span></p>
+    </div>
+
+    <div class="test-box">
+        <h2>Quick Test</h2>
+        <button onclick="testSetFont()">Set Font to Poppins</button>
+        <button onclick="testSetColor()">Set Color to Lime Green</button>
+        <button onclick="clearSettings()">Clear All Settings</button>
+        <button onclick="location.reload()">Reload Page</button>
+    </div>
+
+    <div class="test-box">
+        <h2>This text should change when you apply settings</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h3>Heading 3 Example</h3>
+        <label>Label Example</label>
+        <div>Div Example</div>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="assets/js/font-color-loader.js"></script>
+    <script>
+        function log(msg) {
+            const output = document.getElementById('output');
+            output.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${msg}</div>`;
+        }
+
+        function updateDisplay() {
+            const font = localStorage.getItem('user_font') || 'None';
+            const color = localStorage.getItem('user_font_color') || 'None';
+            document.getElementById('fontDisplay').textContent = font;
+            document.getElementById('colorDisplay').textContent = color;
+            if (color !== 'None') {
+                document.getElementById('colorDisplay').style.color = color;
+            }
+        }
+
+        function testSetFont() {
+            localStorage.setItem('user_font', 'Poppins');
+            log('✅ Font set to Poppins in localStorage');
+            updateDisplay();
+            location.reload();
+        }
+
+        function testSetColor() {
+            localStorage.setItem('user_font_color', '#00ff00');
+            log('✅ Color set to #00ff00 (lime green) in localStorage');
+            updateDisplay();
+            location.reload();
+        }
+
+        function clearSettings() {
+            localStorage.removeItem('user_font');
+            localStorage.removeItem('user_font_color');
+            log('🗑️ All settings cleared');
+            updateDisplay();
+            location.reload();
+        }
+
+        // Initial display
+        updateDisplay();
+        log('📄 Page loaded');
+        log('🔍 Checking localStorage...');
+        log(`Font: ${localStorage.getItem('user_font') || 'Not set'}`);
+        log(`Color: ${localStorage.getItem('user_font_color') || 'Not set'}`);
+    </script>
+</body>
+
+</html>

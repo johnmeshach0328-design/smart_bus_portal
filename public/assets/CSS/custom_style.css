@@ -1,0 +1,1244 @@
+/* ========================================
+   SMART BUS PORTAL - PROFESSIONAL DESIGN SYSTEM
+   ======================================== */
+
+:root {
+    /* Color Palette */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1e40af;
+    --primary-blue-light: #3b82f6;
+    --accent-green: #10b981;
+    --accent-orange: #f59e0b;
+    --accent-red: #ef4444;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+    --gradient-success: linear-gradient(135deg, #047857 0%, #10b981 100%);
+    --gradient-warning: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+    --gradient-danger: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+
+    /* Typography Spacing Tokens */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+
+    /* Neutral Colors */
+    --white: #ffffff;
+    --black: #0f172a;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+
+    /* Spacing & Sizing */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 24px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --shadow-2xl: 0 30px 60px rgba(0, 0, 0, 0.25);
+
+    /* Transitions */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Bootstrap Overrides for Theming */
+.btn-primary {
+    background-color: var(--primary-blue) !important;
+    border-color: var(--primary-blue) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--primary-blue-dark) !important;
+    /* Fallback or calculate if possible, but keep simple for now or use filter */
+    filter: brightness(0.9);
+    border-color: var(--primary-blue) !important;
+}
+
+.text-primary {
+    color: var(--primary-blue) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-blue) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-blue) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-blue) !important;
+    border-color: var(--primary-blue) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-blue) !important;
+    color: white !important;
+}
+
+body {
+    font-family: 'Inter', 'Poppins', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--gray-50);
+    color: var(--text-main);
+    /* Dynamic text color for dark backgrounds */
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Headings Professionalism */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand-text {
+    color: var(--text-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+}
+
+/* Ensure white cards have dark text, but themed cards adapt */
+.card,
+.custom-card,
+.login-card,
+.district-card,
+.modal-content,
+.dropdown-menu {
+    color: var(--text-main) !important;
+    background: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Headings inside cards/containers should respect the theme's heading color */
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.login-card h1,
+.login-card h2,
+.login-card h3,
+.login-card h4,
+.login-card h5,
+.login-card h6,
+.portal-header h1,
+.portal-header h2,
+.portal-header h3,
+.portal-header h4,
+.district-card h1,
+.district-card h2,
+.district-card h3 {
+    color: var(--text-heading) !important;
+}
+
+/* ========================================
+   THEME-AWARE TEXT COLORS
+   ======================================== */
+
+/* All text elements adapt to theme - but not buttons */
+p,
+span:not(.btn):not(.btn *),
+li,
+label,
+small,
+.text-muted {
+    color: var(--text-main);
+}
+
+/* Links should be visible on dark backgrounds - but not button links */
+a:not(.btn):not(.navbar-brand):not(.nav-link) {
+    color: var(--primary-blue);
+}
+
+a:not(.btn):hover {
+    opacity: 0.8;
+}
+
+/* Muted text adapts to theme */
+.text-muted {
+    opacity: 0.7;
+}
+
+/* Inputs should respect theme text main but maintain contrast */
+input,
+select,
+textarea,
+.form-control {
+    color: var(--input-text) !important;
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* But labels must match theme main */
+label,
+.form-label {
+    color: var(--text-main) !important;
+}
+
+/* Ensure shift times are ALWAYS visible - highest priority */
+.shift-chip,
+.shift-chip small,
+.shift-chip *,
+.shift-container .shift-chip,
+.shift-container .shift-chip * {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    opacity: 1 !important;
+}
+
+/* Ensure route stops and other card content text is visible */
+.stop-item h6,
+.stop-item *,
+.details-card p,
+.details-card .text-muted {
+    color: var(--text-main) !important;
+}
+
+/* Bus route text should be visible */
+.details-card .fs-5 {
+    color: var(--text-heading) !important;
+}
+
+/* ========================================
+   ANIMATED BACKGROUNDS
+   ======================================== */
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Gradient Background */
+.animated-bg {
+    background: linear-gradient(-45deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    position: relative;
+}
+
+.animated-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Gradient Animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Alternative Wave Background */
+.wave-bg {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.wave-bg::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+    animation: waveFloat 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes waveFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(30px, -30px) rotate(120deg);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) rotate(240deg);
+    }
+}
+
+/* Mesh Gradient Background */
+.mesh-bg {
+    background:
+        radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.8) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(96, 165, 250, 0.8) 0px, transparent 50%),
+        #0f172a;
+    animation: meshMove 20s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes meshMove {
+
+    0%,
+    100% {
+        background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
+    }
+
+    25% {
+        background-position: 100% 0%, 100% 100%, 0% 100%, 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%, 0% 100%, 0% 0%, 100% 0%;
+    }
+
+    75% {
+        background-position: 0% 100%, 0% 0%, 100% 0%, 100% 100%;
+    }
+}
+
+/* Keep original background images as fallback */
+.bg-movable {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    animation: subtleZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes subtleZoom {
+    0% {
+        background-size: 100% 100%;
+    }
+
+    100% {
+        background-size: 110% 110%;
+    }
+}
+
+.bg-index {
+    background-image: url('../images/background.png');
+}
+
+.bg-add-bus {
+    background-image: url('../images/bg_add_bus.png');
+}
+
+.bg-view-fleet {
+    background-image: url('../images/bg_view_fleet.png');
+}
+
+.bg-attendance {
+    background-image: url('../images/bg_attendance.png');
+}
+
+.bg-staff {
+    background-image: url('../images/bg_staff_control.png');
+}
+
+.bg-doodle {
+    background-image: url('../images/bg_people.png');
+    background-repeat: repeat;
+    background-size: 500px;
+    /* Adjusted size for people pattern */
+}
+
+.bg-overlay::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--gradient-overlay);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ========================================
+   UTILITY ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.high-contrast-glow {
+    text-shadow: var(--text-shadow-glow) !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-down {
+    animation: slideDown 0.5s ease-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.4s ease-out;
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
+.navbar-custom {
+    background: var(--gradient-primary);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 2rem;
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--white) !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: var(--transition-base);
+}
+
+.navbar-brand:hover {
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ========================================
+   CARDS & CONTAINERS
+   ======================================== */
+
+.custom-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-bounce);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-blue-light);
+}
+
+.custom-card:hover::before {
+    transform: scaleX(1);
+}
+
+.custom-card h3 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--gray-800);
+    font-size: 1.5rem;
+}
+
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-2xl);
+    border-radius: var(--border-radius-xl);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn-custom {
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    transition: var(--transition-base);
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-custom::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-custom:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-custom:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   FORMS & INPUTS
+   ======================================== */
+
+.form-control,
+.form-select {
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: var(--transition-base);
+    background: var(--input-bg);
+    color: var(--input-text);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   SELECTION CARDS
+   ======================================== */
+
+.selection-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 3rem 1rem;
+    min-height: 75vh;
+    align-items: center;
+}
+
+.type-card {
+    background: var(--white);
+    width: 320px;
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius-xl);
+    text-decoration: none;
+    color: var(--gray-800);
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-bounce);
+    text-align: center;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.type-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.type-card:hover::before {
+    opacity: 1;
+}
+
+.type-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--shadow-2xl);
+}
+
+.type-card.setc {
+    border-color: var(--primary-blue);
+}
+
+.type-card.ptp {
+    border-color: var(--accent-orange);
+}
+
+.type-card.route {
+    border-color: var(--accent-green);
+}
+
+.type-card h3 {
+    margin: 1rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.type-card i {
+    font-size: 4rem;
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-base);
+}
+
+.type-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+.table-custom {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.table-custom thead {
+    background: var(--gradient-primary);
+    color: var(--white);
+}
+
+.table-custom thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+    padding: 1.25rem 1rem;
+    border: none;
+}
+
+.table-custom tbody tr {
+    transition: var(--transition-fast);
+}
+
+.table-custom tbody tr:hover {
+    background: var(--gray-50);
+    transform: scale(1.01);
+    box-shadow: var(--shadow-sm);
+}
+
+.table-custom td {
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+    border-color: var(--gray-100);
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+
+.badge {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-type {
+    padding: 0.5rem 1.25rem;
+    box-shadow: var(--shadow-xs);
+}
+
+/* ========================================
+   ALERTS
+   ======================================== */
+
+.alert {
+    border-radius: var(--border-radius-md);
+    border: none;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    animation: slideDown 0.4s ease-out;
+}
+
+.alert-dismissible .btn-close {
+    padding: 1.5rem;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gray-200);
+    border-top-color: var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--border-radius-md);
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ========================================
+   THEME-AWARE COMPONENT OVERRIDES
+   ======================================== */
+
+/* Navbar - must follow theme */
+.navbar,
+.navbar.bg-light,
+.navbar.navbar-light {
+    background: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .text-dark,
+.navbar .text-secondary,
+.navbar a {
+    color: var(--text-main) !important;
+}
+
+.navbar .btn-outline-dark {
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+.navbar .btn-outline-dark:hover {
+    background: var(--primary-blue) !important;
+    color: #fff !important;
+    border-color: var(--primary-blue) !important;
+}
+
+/* Glass panel - always theme-aware */
+.glass-panel {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Landscape cards (mark_attendance action choices) */
+.landscape-card {
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+.landscape-card p {
+    color: var(--text-main) !important;
+    opacity: 0.7;
+}
+
+.landscape-card h2 {
+    color: var(--text-heading) !important;
+}
+
+/* Tables - theme-aware */
+.table {
+    color: var(--text-main) !important;
+    --bs-table-bg: transparent;
+}
+
+.table > :not(caption) > * > * {
+    color: var(--text-main) !important;
+    background-color: transparent;
+    border-bottom-color: var(--border-color) !important;
+}
+
+.table-hover > tbody > tr:hover > * {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-main) !important;
+}
+
+thead.table-light th,
+.table-light {
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+}
+
+thead.table-dark th {
+    background: var(--primary-blue) !important;
+    color: #fff !important;
+}
+
+/* Input group addon */
+.input-group-text {
+    background: var(--input-bg) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Form control focus - theme-aware */
+.form-control:focus,
+.form-select:focus {
+    background: var(--input-bg) !important;
+    color: var(--input-text) !important;
+}
+
+/* Bootstrap text utility overrides for theme */
+.text-dark {
+    color: var(--text-main) !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .navbar-custom {
+        padding: 1rem;
+    }
+
+    .custom-card {
+        padding: 1.5rem;
+    }
+
+    .type-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .selection-container {
+        padding: 2rem 1rem;
+    }
+
+    .table-custom {
+        font-size: 0.875rem;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.btn-custom:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   FLOATING SQUARES ANIMATION
+   ======================================== */
+.circles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    margin: 0;
+    padding: 0;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    border-radius: 20%;
+}
+
+.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+/* ========================================
+   EXECUTIVE THEME - GOLD ICON EFFECT
+   ======================================== */
+
+/* When Executive theme is active, make all icons gold */
+body.theme-executive i,
+body.theme-executive .bi,
+body.theme-executive img:not(.no-filter),
+body.theme-executive svg {
+    filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
+}
+
+/* Stronger gold effect for bus type icons */
+body.theme-executive .type-card i,
+body.theme-executive .bus-type-icon {
+    filter: sepia(1) saturate(4) hue-rotate(10deg) brightness(1.2) contrast(1.1);
+}
+
+/* Gold effect for navbar icons and logo - Direct Color Approach */
+body.theme-executive .bi-bus-front,
+body.theme-executive .bi-bus-front-fill,
+body.theme-executive .portal-header i.bi-bus-front,
+body.theme-executive .portal-title i.bi-bus-front {
+    color: #d4af37 !important;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)) !important;
+    -webkit-text-stroke: 0.5px #f2d675;
+}
+
+/* Other navbar icons still use filter */
+body.theme-executive .navbar i:not(.bi-bus-front),
+body.theme-executive .navbar .bi:not(.bi-bus-front),
+body.theme-executive .navbar-brand i:not(.bi-bus-front) {
+    filter: sepia(1) saturate(4) hue-rotate(5deg) brightness(1.4) contrast(1.1);
+}
+
+/* Make navbar brand text and portal title gold */
+body.theme-executive .navbar-brand,
+body.theme-executive h1,
+body.theme-executive .portal-title,
+body.theme-executive .portal-title span {
+    color: #d4af37 !important;
+    text-shadow: 0 3px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Make all buttons gold in Executive theme */
+body.theme-executive .btn,
+body.theme-executive .badge,
+body.theme-executive button {
+    background: linear-gradient(135deg, #d4af37 0%, #f2d675 50%, #d4af37 100%) !important;
+    border-color: #d4af37 !important;
+    color: #1a1a1d !important;
+}
+
+/* Global Portal Cards - Universal Premium Styling */
+.login-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-base);
+}
+
+.login-icon-wrapper {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 2px solid var(--primary-blue) !important;
+    box-shadow: 0 0 15px var(--primary-blue);
+    transition: var(--transition-base);
+}
+
+.login-icon-wrapper i {
+    color: var(--primary-blue) !important;
+    filter: drop-shadow(0 0 5px var(--primary-blue));
+    transition: var(--transition-base);
+}
+
+.login-card h4 {
+    color: var(--text-main) !important;
+    font-weight: 300;
+}
+
+/* Universal Premium Hover Effects */
+.login-card:hover .login-icon-wrapper {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--primary-blue);
+    background: var(--primary-blue) !important;
+}
+
+.login-card:hover .login-icon-wrapper i {
+    color: #000 !important;
+    /* High contrast on hover */
+    filter: none;
+}
+
+.login-card:hover {
+    border-color: var(--primary-blue) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.theme-executive .btn:hover,
+body.theme-executive button:hover {
+    background: linear-gradient(135deg, #f2d675 0%, #d4af37 50%, #f2d675 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4) !important;
+}
+
+/* Outline buttons in Executive theme */
+body.theme-executive .btn-outline-secondary,
+body.theme-executive .btn-outline-primary {
+    background: transparent !important;
+    border: 2px solid #d4af37 !important;
+    color: #d4af37 !important;
+}
+
+body.theme-executive .btn-outline-secondary:hover,
+body.theme-executive .btn-outline-primary:hover {
+    background: #d4af37 !important;
+    color: #1a1a1d !important;
+}
+
+/* Make card borders gold in Executive theme */
+body.theme-executive .type-card,
+body.theme-executive .type-card.setc,
+body.theme-executive .type-card.ptp,
+body.theme-executive .type-card.route {
+    border-color: #d4af37 !important;
+    border-width: 3px !important;
+}
+
+body.theme-executive .type-card::before {
+    background: linear-gradient(135deg, #d4af37 0%, #f2d675 100%) !important;
+}
+
+/* Ensure district card text follows theme */
+.district-card,
+.district-card h3,
+.district-card p,
+.district-card *:not(i):not(.bi) {
+    color: var(--text-main) !important;
+}
+
+/* Type card text should follow theme */
+.type-card h3,
+.type-card p,
+.type-card span:not(.badge) {
+    color: var(--text-main) !important;
+}
+
+/* Executive Theme - Force Black Background */
+body.theme-executive {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+}
+
+body.theme-executive .circles li {
+    background: rgba(212, 175, 55, 0.1) !important;
+}
+
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 20%;
+    }
+
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
